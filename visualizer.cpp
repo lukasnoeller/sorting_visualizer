@@ -4,8 +4,9 @@
 *
 ********************************************************************************************/
 
+#include <iostream>
 #include "raylib.h"
-
+using namespace std;
 #define MOUSE_SCALE_MARK_SIZE   12
 
 //------------------------------------------------------------------------------------
@@ -26,7 +27,13 @@ int main(void)
 
     bool mouseScaleReady = false;
     bool mouseScaleMode = false;
-
+    int array[20];
+    for(int i = 0; i<sizeof(array) / sizeof(int); i++)
+    {
+        array[i] = rand() % 100;
+        cout << "array[" << i <<"]:" << array[i] << "\n" ;
+    }
+    int r = rand() % 100;   
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
 
@@ -36,21 +43,18 @@ int main(void)
         // Update
         //----------------------------------------------------------------------------------
 
- 
+        
         //----------------------------------------------------------------------------------
 
         // Draw
         //----------------------------------------------------------------------------------
         BeginDrawing();
-
             ClearBackground(RAYWHITE);
 
             DrawText("Visualize the array elements", 10, 10, 20, GRAY);
 
             DrawRectangleRec(rec, Fade(GREEN, 0.5f));
 
-          
-        
             DrawRectangleLinesEx(rec, 1, RED);
         EndDrawing();
         //----------------------------------------------------------------------------------
