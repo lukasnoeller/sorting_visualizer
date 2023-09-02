@@ -16,24 +16,31 @@ int main(void)
 {
     // Initialization
     //--------------------------------------------------------------------------------------
-    const int screenWidth = 800;
-    const int screenHeight = 450;
-
+    const int screenWidth = 1800;
+    const int screenHeight = 950;
+    const int margin_vert = int(0.05 * screenHeight);
+    const int margin_hori_want = int(0.02* screenWidth);
+    int num_recs = 300;
+    int width = int((screenWidth - 2 * margin_hori_want)/num_recs);
+    int height;
+    int margin_hori = int((screenWidth - num_recs * width) / 2);
+    int x_pos = margin_hori;
+    Rectangle recs[num_recs];
+    cout << "width:" << width<< "\n" ;
+  
+    for(int i = 0; i<sizeof(recs) / sizeof(Rectangle); i++)
+    {
+        height = rand() % (screenHeight - margin_vert); 
+        x_pos = x_pos + width;
+        Rectangle rec = { x_pos, screenHeight - height - margin_vert, width, height };
+        recs[i] = rec;
+        cout << "rec[" << i <<"].x:" << rec.x<< "\n" ;
+        cout << "rec[" << i <<"].y:" << rec.y<< "\n" ;
+        cout << "rec[" << i <<"].width:" << rec.width<< "\n" ;
+        cout << "rec[" << i <<"].height:" << rec.height<< "\n" ;
+    }
     InitWindow(screenWidth, screenHeight, "Sorting algorithm visualizer");
 
-    Rectangle rec = { 100, 100, 200, 80 };
-
-    Vector2 mousePosition = { 0 };
-
-    bool mouseScaleReady = false;
-    bool mouseScaleMode = false;
-    int array[20];
-    for(int i = 0; i<sizeof(array) / sizeof(int); i++)
-    {
-        array[i] = rand() % 100;
-        cout << "array[" << i <<"]:" << array[i] << "\n" ;
-    }
-    int r = rand() % 100;   
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
 
@@ -52,10 +59,12 @@ int main(void)
             ClearBackground(RAYWHITE);
 
             DrawText("Visualize the array elements", 10, 10, 20, GRAY);
+            for(int i = 0; i<sizeof(recs) / sizeof(Rectangle); i++)
+            {
+                DrawRectangleLinesEx(recs[i], 1, RED);
+                
+            }
 
-            DrawRectangleRec(rec, Fade(GREEN, 0.5f));
-
-            DrawRectangleLinesEx(rec, 1, RED);
         EndDrawing();
         //----------------------------------------------------------------------------------
     }
