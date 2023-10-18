@@ -13,9 +13,7 @@ using namespace std;
 // quicksort function with pivot point at end of array
 void quicksort_lomuto(int* array, int size_array, int low, int high)
 { 
-    Music music = LoadMusicStream("resources/ff7_enemy_death.mp3");
 
-    PlayMusicStream(music);
     const int screenWidth = 1900;
     const int screenHeight = 950;
     const int margin_vert = int(0.05 * screenHeight);
@@ -115,7 +113,6 @@ void quicksort_lomuto(int* array, int size_array, int low, int high)
             return;
         }
         cout<<"doing lower half \n";
-        UnloadMusicStream(music);   // Unload music stream buffers from RAM
         quicksort_lomuto(array,size_array, low, low + size_lower-1);
         cout<<"doing upper half \n";
         quicksort_lomuto(array, size_array, low + size_lower,high);
