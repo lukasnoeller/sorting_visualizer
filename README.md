@@ -1,2 +1,2 @@
 # sorting_visualizer
-A sorting algorithm visualizer app
+A sorting algorithm visualizer app.
